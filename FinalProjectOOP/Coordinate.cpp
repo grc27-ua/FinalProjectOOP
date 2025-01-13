@@ -1,5 +1,6 @@
 #include "Coordinate.h"
 #include "Util.h"
+#include <string>
 
 // Coordinate c1;
 //	this = &c1
