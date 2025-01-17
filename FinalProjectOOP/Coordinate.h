@@ -1,4 +1,3 @@
-#pragma once
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 #include <iostream>
