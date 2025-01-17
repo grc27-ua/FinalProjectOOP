@@ -3,49 +3,27 @@
 using namespace std;
 
 Ship::Ship(ShipType type, const vector<Coordinate*>& positions) {
-	// TODO EL TAMAÑO DEL BARCO (positions.size()) NO COINCIDE CON
-	// EL TYPO BARCO PUES HAY QUE LANAZAR UNA EXCEPCION.!!!
+
 	if (positions.size() != shipSize(type)) {
 		throw EXCEPTION_WRONG_COORDINATES;
 	}
 
 	this->state = OK;
 	this->type = type;
-	this->positions = positions; // copiamos el vector en el del nuevo barco.
+	this->positions = positions; 
 	for (int i = 0; i < positions.size(); i++) {
 		positions[i]->setState(SHIP);
 		(*positions[i]).setState(SHIP);
 	}
 	for (Coordinate* p : positions) {
-		// p = positions[0]
-		// p = positions[1]
-		// p = positions[2]...
+
 		p->setState(SHIP);
 	}
 
 }
 
-// solo voy a utilizar el type que me pasan como parametro
 unsigned Ship::shipSize(ShipType type) {
-	/*unsigned size;
-	switch(type){
-		case BATTLESHIP:
-			size = 4;
-		break;
-		case DESTROYER:
-			size = 3;
-		break;
-		case CRUISE:
-			size = 2;
-		break;
-		case SUBMARINE:
-			size = 1;
-		break;
-	}
-	return size;*/
 
-	/*int sizes[] = {4, 3, 2, 1};
-	return sizes[type];*/
 
 	return (unsigned)(4 - type);
 }
@@ -91,37 +69,30 @@ ShipState Ship::getState() const {
 bool Ship::hit(const Coordinate& coord) {
 	bool resultado = false;
 	int pos, nhits;
-	// coord.compare(*positions[i]);
-	// coord.compare(*p)
-	// positions[i]->compare(coord)
-	// p->compare(coord)
+
 
 	for (int i = 0; i < positions.size() && !resultado; i++) {
 		if (coord.compare(*positions[i])) {
 			resultado = true;
-			pos = i; // me guardo la posicion		
+			pos = i; 
 		}
 	}
 	if (resultado) {
-		// ya la he encontrado!!
 		if (state == SUNK) {
 			throw EXCEPTION_ALREADY_SUNK;
 		}
-		// si ya estaba hit...
 		if (positions[pos]->getState() == HIT) {
 			throw EXCEPTION_ALREADY_HIT;
 		}
-		// si no estaba hit, hitlearla y comprobar si todo esta
-		// hit para sunk...
+		
 		positions[pos]->setState(HIT);
-		// comprobamos si todas estan hit.
 		nhits = 0;
 		for (int i = 0; i < positions.size(); i++) {
 			if (positions[i]->getState() == HIT) {
 				nhits++;
 			}
 		}
-		if (nhits == shipSize(type)) { // nhits == positions.size()
+		if (nhits == shipSize(type)) { 
 			state = SUNK;
 		}
 		else {
@@ -132,10 +103,8 @@ bool Ship::hit(const Coordinate& coord) {
 	return resultado;
 }
 
-// cout << ship; ==> operator<<(cout, ship);
 ostream& operator<<(ostream& os, const Ship& ship) {
-	// you have to print the shiptype, state between braces and 
-	// the coordinate list.
+	
 
 	string nombres[] = { "BATTLESHIP", "DESTROYER", "CRUISE", "SUBMARINE" };
 	string barquitos[] = { "O", "D", "S" };

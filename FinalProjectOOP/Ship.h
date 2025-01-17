@@ -23,9 +23,7 @@ class Ship {
 protected:
 	ShipState state;
 	ShipType type;
-	// El barco contiene las direcciones de las coordenadas
-	// que ocupan el tablero. Para poder modificar desde el barco
-	// el estado de las coordenadas que hay en el tablero
+
 	vector<Coordinate*> positions;
 public:
 	Ship(ShipType type, const vector<Coordinate*>& positions);

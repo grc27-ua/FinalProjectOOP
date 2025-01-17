@@ -2,10 +2,7 @@
 #include "Util.h"
 #include <string>
 
-// Coordinate c1;
-//	this = &c1
-// Coordinate c2;
-//	this = &c2
+
 
 Coordinate::Coordinate() {
 	/*this->*/row = -1;
@@ -13,40 +10,19 @@ Coordinate::Coordinate() {
 	state = NONE;
 }
 
-// this contiene la direccion del objeto que invoca el metodo
-// esta implicita en todos los metodos de instancias
-//	En los constructores contiene la direccion dle objeto que estamos
-// 	inicializando.
 
-// Coordinate c1(3, 4);
-//		this = &c1
-//		row = 3
-//		colum = 4
-//	this->row = 3
-//	this->column = 4;
+
+
 Coordinate::Coordinate(int row, int column) {
 	this->row = row;
 	this->column = column;
 	state = NONE;
 }
 
-// la cadena siempre es correcta.
-//  012
-// -----------------------------------------
-// "A1"		row = 0		column = 0
-// "A7"		row ='A'-'A'	column = '7'(56) - '0'(49) - 1 = 6
-// "B12"	row = 1		column = 11
-// "C12"	row = 2		column = 11
-// "D34"	row = 3		column = 33
+
 
 Coordinate::Coordinate(string coord) {
-	/*	row = coord[0] - 'A';
-		if(coord.length() == 2){
-			column = coord[1] - '0' - 1;
-		}
-		else{
-			column = (coord[1] - '0') * 10 + (coord[2] - '0') - 1;
-		}*/
+
 	string aux;
 	row = coord[0] - 'A';
 	aux = coord.substr(1);
@@ -66,7 +42,7 @@ CellState Coordinate::getState() const {
 	return state;
 }
 
-char Coordinate::getStateChar() const { // const Coordinate *this;
+char Coordinate::getStateChar() const {
 	char car;
 	switch (state) {
 	case NONE:
@@ -97,16 +73,6 @@ void Coordinate::setState(CellState state) {
 	this->state = state;
 }
 
-// Coordinate c1(1, 2);
-// Coordinate c2(1, 2);
-// Coordinate c3(3, 6);
-// cout << c1.compare(c2) << endl;
-//		const Coordinate *this = &c1
-//		const Coordinate &coord = c2;
-
-// cout << c3.compare(c1) << endl;
-//		const Coordinate *this = &c3;
-//		const Coordinate &coord =c1;
 
 
 bool Coordinate::compare(const Coordinate& coord) const {
@@ -117,14 +83,7 @@ bool Coordinate::compare(const Coordinate& coord) const {
 	return iguales;
 }
 
-// Coordinate c("T20");
-// Coordinate r = c1.addOffset(3, NORTH);
-//			const Coordinate *this = &c1;
-//			int offset = 3;
-//			Orientation orientation = orientation;
 
-// cout << r.getRow() << ", " << r.getColumn() << endl; // 16
-// cout << c1.getRow() << ", " << c1.getColumn() << endl // 19
 Coordinate Coordinate::addOffset(int offset, Orientation orientation) const {
 	// Coordinate res = *this;	
 	Coordinate res;
@@ -148,10 +107,8 @@ Coordinate Coordinate::addOffset(int offset, Orientation orientation) const {
 }
 
 
-// cout << Coordinate::orientationFromChar('N'); // 0
 Orientation Coordinate::orientationFromChar(char orientation) {
-	// NO NECESITO UNA COORDENADA, SOLO USO EL PARAMETRO, orientation
-	// => static
+
 	Orientation resultado;
 	switch (orientation) {
 	case 'N':
@@ -175,8 +132,7 @@ Orientation Coordinate::orientationFromChar(char orientation) {
 	return resultado;
 }
 
-// Coordinate c1;
-// operator<<(cout, c1);
+
 
 ostream& operator<<(ostream& os, const Coordinate& c) {
 	if (c.getColumn() != -1 && c.getRow() != -1) {
