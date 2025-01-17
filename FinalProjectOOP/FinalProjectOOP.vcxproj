@@ -140,11 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Coordinate.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordinate.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
